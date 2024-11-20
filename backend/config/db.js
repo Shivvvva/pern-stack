@@ -1,11 +1,13 @@
-import mongoose from "mongoose";
+import pg from "pg";
 
-export const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`Error: ${error.message}`);
-    process.exit(1);
-  }
-};
+const { Pool } = pg;
+
+const pool = new Pool({
+  host: "localhost",
+  user: "postgres",
+  port: 5432,
+  password: "admin",
+  database: "pern",
+});
+
+export default pool;
